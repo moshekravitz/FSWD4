@@ -1,0 +1,15 @@
+.virtual-keyboard {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding: 10px;
+    background-color: #f9f9f9;
+  }
+  .virtual-keyboard button {
+    padding: 8px 12px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+  }

@@ -1,0 +1,14 @@
+.toolbar {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 4px;
+  }
+  .toolbar select,
+  .toolbar input[type="number"],
+  .toolbar input[type="color"] {
+    padding: 5px;
+    font-size: 1rem;
+  }

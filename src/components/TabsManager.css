@@ -1,0 +1,38 @@
+.tabs-manager {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.tabs {
+  display: flex;
+  background-color: #e0e0e0;
+  padding: 5px;
+}
+.tab {
+  background-color: white;
+  border: 1px solid #ccc;
+  margin-right: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 4px 4px 0 0;
+  position: relative;
+}
+.tab span {
+  margin-left: 5px;
+  color: red;
+  font-weight: bold;
+  cursor: pointer;
+}
+.tab.active {
+  background-color: #ffffff;
+  border-bottom: none;
+  font-weight: bold;
+}
+.add-tab {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
