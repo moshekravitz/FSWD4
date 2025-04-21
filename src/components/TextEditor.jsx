@@ -4,6 +4,7 @@ import Toolbar from './Toolbar';
 import VirtualKeyboard from './VirtualKeyboard';
 import FileManager from './FileManager';
 import './TextEditor.css';
+import { Keyboard } from './Keyboard';
 
 const TextEditor = ({ tab }) => {
   const [text, setText] = useState(tab.content);
@@ -24,6 +25,7 @@ const TextEditor = ({ tab }) => {
         className="editor-area"
       />
       <VirtualKeyboard onInsert={(char) => setText(text + char)} />
+      <Keyboard onKeyPress={(char) => setText(text + char)}/>
       <FileManager text={text} setText={setText} />
     </div>
   );
