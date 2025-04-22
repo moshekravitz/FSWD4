@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PreviewPane from './PreviewPane';
 import Toolbar from './Toolbar';
-import VirtualKeyboard from './VirtualKeyboard';
+import VirtualKeyboard from './EmojiKB';
 import FileManager from './FileManager';
 import './TextEditor.css';
 import { Keyboard } from './Keyboard';

@@ -1,5 +1,5 @@
 import React from 'react';
-import './VirtualKeyboard.css';
+import './EmojiKB.css';
 
 const symbols = ['!', '@', '#', '$', '%', '^', '&', '*', '😊', '❤️', 'שלום'];
 

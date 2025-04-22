@@ -1,10 +1,16 @@
 import React from "react";
 import "./key.css";
 
-const Key = ({ label, onClick, style }) => {
+const Key = ({ dataKey, label, onClick, style, pressed }) => {
     return (
-        <button className="key" onClick={onClick} style={style}>
-            <span>{label}</span>
+        <button
+            className={`key ${pressed ? "pressed" : ""}`}
+            onClick={() => onClick(dataKey)}
+            style={style}
+            data-key={label}
+            data-myKey={dataKey}
+        >
+        {label}
         </button>
     );
 };
