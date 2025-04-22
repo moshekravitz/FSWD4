@@ -3,9 +3,10 @@ import "./Keyboard.css";
 import Key from "./key";
 import KeyboardRow from "./KeyboardRow";
 
-export const Keyboard = ({ onKeyPress }) => {
-    const keys = [
-        [
+export const Keyboard = ({ onKeyPress, language = "en" }) => {
+  const layouts = {
+    en: [
+      [
             { key: "Esc", caps: "Esc" },
             { key: "F1", caps: "F1" },
             { key: "F2", caps: "F2" },
@@ -22,7 +23,7 @@ export const Keyboard = ({ onKeyPress }) => {
             { key: "Ins", caps: "Ins" },
             { key: "Del", caps: "Del" }
         ],
-        [
+      [
             { key: "`", caps: "~" },
             { key: "1", caps: "!" },
             { key: "2", caps: "@" },
@@ -38,7 +39,7 @@ export const Keyboard = ({ onKeyPress }) => {
             { key: "=", caps: "+" },
             { key: "Backspace", caps: "Backspace" }
         ],
-        [
+      [
             { key: "Tab", caps: "Tab" },
             { key: "q", caps: "Q" },
             { key: "w", caps: "W" },
@@ -54,7 +55,7 @@ export const Keyboard = ({ onKeyPress }) => {
             { key: "]", caps: "}" },
             { key: "\\", caps: "|" }
         ],
-        [
+      [
             { key: "Caps Lock", caps: "Caps Lock" },
             { key: "a", caps: "A" },
             { key: "s", caps: "S" },
@@ -69,7 +70,7 @@ export const Keyboard = ({ onKeyPress }) => {
             { key: "'", caps: "\"" },
             { key: "Enter", caps: "Enter" }
         ],
-        [
+      [
             { key: "Shift", caps: "Shift" },
             { key: "z", caps: "Z" },
             { key: "x", caps: "X" },
@@ -83,7 +84,7 @@ export const Keyboard = ({ onKeyPress }) => {
             { key: "/", caps: "?" },
             { key: "Shift r", caps: "Shift r" }
         ],
-        [
+      [
             { key: "Ctrl", caps: "Ctrl" },
             { key: "Fn", caps: "Fn" },
             { key: "Win", caps: "Win" },
@@ -94,26 +95,39 @@ export const Keyboard = ({ onKeyPress }) => {
             { key: "Menu", caps: "Menu" },
             { key: "Ctrl r", caps: "Ctrl r" }
         ],
-    ];
+    ],
+    he: [
+      ["Esc", "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12", "Ins", "Del"],
+      ["~", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=", "Backspace"],
+      ["Tab", "ק", "ר", "א", "ט", "ו", "ן", "ם", "פ", "\"", "[", "]", "\\"],
+      ["Caps Lock", "ש", "ד", "ג", "כ", "ע", "י", "ח", "ל", ";", "'", "Enter"],
+      ["Shift", "ז", "ס", "ב", "ה", "נ", "מ", ",", ".", "/", "Shift r"],
+      ["Ctrl", "Fn", "Win", "Alt", "Space", "Win r", "Alt r", "Menu", "Ctrl r"],
+    ],
+    emoji: [
+      ["😊", "😂", "😍", "👍", "🙏", "🔥", "🥺", "🎉", "❤️", "😭", "✨", "💯", "❌"],
+      ["😎", "🤔", "😢", "😡", "😴", "🙌", "💖", "🎂", "🌟", "💥", "🚀", "👏", "✔"],
+    ],
+  };
 
-    const keySizes = {
-        "Backspace": 1,
-        "\\": 1,
-        "Tab": 1.5,
-        "Caps Lock": 1.75,
-        "Enter": 2.25,
-        "Shift": 2.25,
-        "Shift r": 2.25,
-        "Space": 15,
-        "Ctrl": 2.25,
-        "Ctrl r": 1.5,
-    };
+  const keySizes = {
+    Backspace: 1,
+    "\\": 1,
+    Tab: 1.5,
+    "Caps Lock": 1.75,
+    Enter: 2.25,
+    Shift: 2.25,
+    "Shift r": 2.25,
+    Space: 15,
+    Ctrl: 2.25,
+    "Ctrl r": 1.5,
+  };
 
-    const rowStyle = {
-        display: "flex",
-        width: "100%",
-        gap: "5px",
-    };
+  const rowStyle = {
+    display: "flex",
+    width: "100%",
+    gap: "5px",
+  };
 
     const [pressedKeys, setPressedKeys] = useState({});
 
@@ -178,27 +192,32 @@ export const Keyboard = ({ onKeyPress }) => {
     let caps = isShift ^ isCapsLock;
     console.log(`shift: ${isShift} caps: ${caps}`);
 
-    return (
-        <div className="keyboard">
-            {keys.map((row, rowIndex) => (
-                <KeyboardRow
-                    key={rowIndex}
-                    style={rowStyle}
-                    keys={row.map((key) => (
-                        <Key
-                            dataKey={key}
-                            label={!caps ? key.key : key.caps}
-                            onClick={handleKeyPressed}
+
+  const layout = layouts[language] || layouts.en;
+
+  return (
+    <div className="keyboard">
+      <div className="keyboard-language">Current: {language.toUpperCase()}</div>
+      {layout.map((row, rowIndex) => (
+        <KeyboardRow
+          key={rowIndex}
+          style={rowStyle}
+          keys={row.map((key) => (
+            <Key
+              dataKey={key}
+              label={!caps ? key.key : key.caps}
+              onClick={handleKeyPressed}
                             pressed={!!pressedKeys[key.key]}
-                            style={{
-                                flexGrow: keySizes[key.key] || 0,
-                                flexBasis: keySizes[key.key] ? "auto" : "50px",
-                                height: rowIndex === 0 ? "30px" : "50px",
-                            }}
-                        />
-                    ))}
-                />
-            ))}
-        </div>
-    );
+              style={{
+                flexGrow: keySizes[key.key] || 0,
+                flexBasis: keySizes[key.key] ? "auto" : "50px",
+                height: rowIndex === 0 ? "30px" : "50px",
+              }}
+            />
+          ))}
+        />
+      ))}
+    </div>
+  );
 };
+
