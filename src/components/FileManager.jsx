@@ -1,7 +1,7 @@
 import React from 'react';
 import './FileManager.css';
 
-const FileManager = ({ text, setText }) => {
+const FileManager = ({ text, setText,tab, updateTabName  }) => {
   const username = localStorage.getItem('username');
 
   const saveFile = () => {
@@ -11,6 +11,7 @@ const FileManager = ({ text, setText }) => {
       if (!files[username]) files[username] = {};
       files[username][name] = text;
       localStorage.setItem('user_files', JSON.stringify(files));
+      updateTabName(tab.id, name);
       alert('File saved.');
     }
   };
@@ -26,6 +27,7 @@ const FileManager = ({ text, setText }) => {
     const name = prompt('Enter file name to open:\n' + names.join(', '));
     if (name && userFiles[name]) {
       setText(userFiles[name]);
+      updateTabName(tab.id, name);
     } else {
       alert('File not found.');
     }
