@@ -1,20 +1,64 @@
 .text-editor {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    padding: 10px;
-    background-color: #fafafa;
-  }
-  .editor-area {
-    width: 100%;
-    height: 150px;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    resize: vertical;
-    font-family: inherit;
-    font-size: inherit;
-    color: inherit;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 15px;
+  background: linear-gradient(135deg, #ffffff, #f5f5f5);
+  overflow: auto;
+}
+
+.editor-area {
+  width: 100%;
+  height: 200px;
+  padding: 15px;
+  margin: 15px 0;
+  border: none;
+  border-radius: 12px;
+  resize: vertical;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background: white;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.editor-area:focus {
+  outline: none;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+}
+
+.editor-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.editor-section {
+  margin-bottom: 20px;
+  border-radius: 12px;
+  overflow: hidden;
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.preview-pane {
+  padding: 15px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  margin-bottom: 15px;
+}
+
+.editor-heading {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #333;
+}

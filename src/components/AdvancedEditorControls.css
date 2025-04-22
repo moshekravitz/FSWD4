@@ -1,19 +1,64 @@
 .advanced-controls {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    padding: 10px;
-    background: #eee;
-    border-radius: 8px;
-    justify-content: space-between;
-  }
-  .advanced-controls button {
-    padding: 6px 10px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    background: white;
-  }
-  
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 15px;
+  background: linear-gradient(to right, #ECE9E6, #FFFFFF);
+  border-radius: 12px;
+  justify-content: space-between;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  margin-bottom: 10px;
+}
+
+.advanced-controls .lang-switch,
+.advanced-controls .edit-actions,
+.advanced-controls .delete-actions,
+.advanced-controls .advanced-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.advanced-controls button {
+  padding: 8px 14px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  background: white;
+  color: #555;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.advanced-controls .lang-switch button {
+  background: linear-gradient(to right, #4facfe, #00f2fe);
+  color: white;
+}
+
+.advanced-controls .edit-actions button {
+  background: linear-gradient(to right, #667eea, #764ba2);
+  color: white;
+}
+
+.advanced-controls .delete-actions button {
+  background: linear-gradient(to right, #ff9a9e, #fecfef);
+  color: #444;
+}
+
+.advanced-controls .advanced-actions button {
+  background: linear-gradient(to right, #96e6a1, #d4fc79);
+  color: #444;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.advanced-controls button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+}
+
+.advanced-controls button:active {
+  transform: translateY(0);
+}

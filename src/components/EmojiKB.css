@@ -1,15 +1,36 @@
 .virtual-keyboard {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-    padding: 10px;
-    background-color: #f9f9f9;
-  }
-  .virtual-keyboard button {
-    padding: 8px 12px;
-    font-size: 1.2rem;
-    cursor: pointer;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: white;
-  }
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 15px;
+  background: linear-gradient(to right, #E0EAFC, #CFDEF3);
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  margin: 10px 0;
+}
+
+.virtual-keyboard button {
+  padding: 10px 16px;
+  font-size: 1.4rem;
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  background: white;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+  min-width: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.virtual-keyboard button:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4eff9 100%);
+}
+
+.virtual-keyboard button:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

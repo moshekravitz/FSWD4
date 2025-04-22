@@ -106,7 +106,9 @@ const TextEditor = ({ tab , updateTabName,updateTabLanguage}) => {
         className="editor-area"
       />
       <VirtualKeyboard onInsert={handleInsert} />
-      <Keyboard onKeyPress={handleInsert} language={language} onLanguageToggle={toggleLanguage} />
+      
+        <Keyboard onKeyPress={handleInsert} language={language} onLanguageToggle={toggleLanguage} />
+      
       <FileManager text={text} setText={setText} tab={tab} updateTabName={updateTabName}  />
     </div>
   );

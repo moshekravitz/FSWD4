@@ -1,34 +1,59 @@
 .key {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    height: 50px;
-    width: 50px;
-    border: 2px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.20);
-    font-size: 18px;
-    font-weight: bold;
-    color: #333;
-    cursor: pointer;
-    user-select: none;
-    flex-basis: 0;
-    flex-shrink: 1;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  width: 50px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(145deg, #ffffff, #e6e6e6);
+  box-shadow: 5px 5px 10px #d1d1d1, -5px -5px 10px #ffffff;
+  font-size: 18px;
+  font-weight: 600;
+  color: #444;
+  cursor: pointer;
+  user-select: none;
+  flex-basis: 0;
+  flex-shrink: 1;
+  transition: all 0.2s ease;
 }
+
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
+  border-radius: 10px;
+  border: none;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
+  transition: all 0.25s ease;
 }
+
 button:hover {
-    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.20);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
 }
 
 button:active, .pressed {
-    box-shadow: 0 0 0 rgba(0, 0, 0, 0.1);
-    background-color: #d3d3d3;
-    transform: scale(0.95);
+  box-shadow: inset 2px 2px 5px #babecc, inset -2px -2px 5px #fff;
+  background: #e0e0e0;
+  transform: scale(0.98);
+}
+
+.key[data-key="Tab"],
+.key[data-key="Caps Lock"],
+.key[data-key="Shift"],
+.key[data-key="Shift r"],
+.key[data-key="Enter"] {
+  background: linear-gradient(145deg, #e6e6e6, #d9d9d9);
+  color: #333;
+}
+
+.key[data-key="Backspace"],
+.key[data-key="Delete"] {
+  background: linear-gradient(145deg, #ffebf0, #ffc5d0);
+  color: #e63946;
+}
+
+.key[data-key="Space"] {
+  background: linear-gradient(145deg, #f0f4ff, #d8e1ff);
+  color: #4361ee;
 }
