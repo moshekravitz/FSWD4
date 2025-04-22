@@ -60,6 +60,27 @@ const TextEditor = ({ tab , updateTabName,updateTabLanguage}) => {
         setText(replaced);
         break;
       }
+      case 'bold': {
+        setStyle(prevStyle => ({
+          ...prevStyle,
+          fontWeight: prevStyle.fontWeight === 'bold' ? 'normal' : 'bold',
+        }));
+        break;
+      }
+      case 'italic': {
+        setStyle(prevStyle => ({
+          ...prevStyle,
+          fontStyle: prevStyle.fontStyle === 'italic' ? 'normal' : 'italic',
+        }));
+        break;
+      }
+      case 'underline': {
+        setStyle(prevStyle => ({
+          ...prevStyle,
+          textDecoration: prevStyle.textDecoration === 'underline' ? 'none' : 'underline',
+        }));
+        break;
+      }
       default: break;
     }
   };
@@ -73,7 +94,7 @@ const TextEditor = ({ tab , updateTabName,updateTabLanguage}) => {
   return (
     <div className="text-editor">
       <AdvancedEditorControls onAction={handleEditorAction} />
-      <PreviewPane text={text} style={style} />
+      {/* <PreviewPane text={text} style={style} /> */}
       <Toolbar style={style} setStyle={setStyle} />
       <textarea
         value={text}
