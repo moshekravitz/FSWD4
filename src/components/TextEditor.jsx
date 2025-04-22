@@ -9,7 +9,7 @@ import AdvancedEditorControls from './AdvancedEditorControls';
 import './TextEditor.css';
 import './AdvancedEditorControls.css';
 
-const TextEditor = ({ tab }) => {
+const TextEditor = ({ tab , updateTabName,updateTabLanguage}) => {
   const [text, setText] = useState(tab.content);
   const [style, setStyle] = useState({ fontSize: '16px', color: '#000', fontFamily: 'Arial' });
   const [language, setLanguage] = useState('en');
@@ -18,6 +18,13 @@ const TextEditor = ({ tab }) => {
   useEffect(() => {
     tab.content = text;
   }, [text]);
+
+  useEffect(() => {
+    setText(tab.content);
+    setLanguage(tab.language); 
+  }, [tab.id]);
+  
+
 
   const handleInsert = (char) => {
     setUndoStack([...undoStack, text]);
@@ -56,11 +63,12 @@ const TextEditor = ({ tab }) => {
       default: break;
     }
   };
-
   const toggleLanguage = () => {
     const nextLang = language === 'en' ? 'he' : language === 'he' ? 'emoji' : 'en';
     setLanguage(nextLang);
+    updateTabLanguage(tab.id, nextLang); // עדכון השפה של הטאב
   };
+  
 
   return (
     <div className="text-editor">
@@ -70,15 +78,15 @@ const TextEditor = ({ tab }) => {
       <textarea
         value={text}
         onChange={(e) => {
-          setUndoStack([...undoStack, text]);
           setText(e.target.value);
+          updateTabContent(tab.id, e.target.value);
         }}
         style={style}
         className="editor-area"
       />
       <VirtualKeyboard onInsert={handleInsert} />
       <Keyboard onKeyPress={handleInsert} language={language} onLanguageToggle={toggleLanguage} />
-      <FileManager text={text} setText={setText} />
+      <FileManager text={text} setText={setText} tab={tab} updateTabName={updateTabName}  />
     </div>
   );
 };

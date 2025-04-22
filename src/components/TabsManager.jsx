@@ -8,9 +8,14 @@ const TabsManager = ({ username }) => {
 
   const addNewTab = () => {
     const newId = Date.now();
-    setTabs([...tabs, { id: newId, name: 'Untitled', content: '', savedContent: '' }]);
+    setTabs([
+      ...tabs,
+      { id: newId, name: 'Untitled', content: '', savedContent: '', language: 'en' } 
+    ]);
     setActiveTab(newId);
   };
+  
+  
 
   const closeTab = (id) => {
     const tab = tabs.find(t => t.id === id);
@@ -44,6 +49,10 @@ const TabsManager = ({ username }) => {
     setTabs(prev => prev.map(tab => tab.id === id ? { ...tab, savedContent: content } : tab));
   };
 
+  const updateTabName = (id, newName) => {
+    setTabs(prev => prev.map(tab => tab.id === id ? { ...tab, name: newName } : tab));
+  };
+
   return (
     <div className="tabs-manager">
       <div className="tabs">
@@ -64,6 +73,7 @@ const TabsManager = ({ username }) => {
           tab={tabs.find(tab => tab.id === activeTab)}
           onChange={(content) => updateTabContent(activeTab, content)}
           onSave={(content) => updateSavedContent(activeTab, content)}
+          updateTabName={updateTabName}
         />
       )}
     </div>
