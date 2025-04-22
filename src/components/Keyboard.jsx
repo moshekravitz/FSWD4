@@ -56,7 +56,7 @@ export const Keyboard = ({ onKeyPress, language = "en" }) => {
                 { key: "\\", caps: "|" }
             ],
             [
-                { key: "Caps Lock", caps: "Caps Lock" },
+                { key: "CapsLock", caps: "CapsLock" },
                 { key: "a", caps: "A" },
                 { key: "s", caps: "S" },
                 { key: "d", caps: "D" },
@@ -144,7 +144,7 @@ export const Keyboard = ({ onKeyPress, language = "en" }) => {
                 { key: "\\", caps: "|" }
             ],
             [
-                { key: "Caps Lock", caps: "Caps Lock" },
+                { key: "CapsLock", caps: "CapsLock" },
                 { key: "ש", caps: "ש" },
                 { key: "ד", caps: "ד" },
                 { key: "ג", caps: "ג" },
@@ -218,7 +218,7 @@ export const Keyboard = ({ onKeyPress, language = "en" }) => {
         Backspace: 1,
         "\\": 1,
         Tab: 1.5,
-        "Caps Lock": 1.75,
+        "CapsLock": 1.75,
         Enter: 2.25,
         Shift: 2.25,
         "Shift r": 2.25,
@@ -235,6 +235,7 @@ export const Keyboard = ({ onKeyPress, language = "en" }) => {
 
     const [pressedKeys, setPressedKeys] = useState({});
 
+    /*
     useEffect(() => {
         const handleKeyDown = (e) => {
             let key = e.key;
@@ -244,8 +245,13 @@ export const Keyboard = ({ onKeyPress, language = "en" }) => {
             if (key === "Shift") key = e.location === 1 ? "Shift" : "Shift r";
             if (key === "Alt") key = e.location === 1 ? "Alt" : "Alt r";
 
-            onKeyPress(key);
-            setPressedKeys((prev) => ({ ...prev, [key]: true }));
+            const layout = layouts[language] || layouts.en;
+            const keyObject = layout.flat().find((k) => k.key === key);
+
+            if (keyObject) {
+                handleKeyPressed(keyObject);
+                setPressedKeys((prev) => ({ ...prev, [key]: true }));
+            }
         };
 
         const handleKeyUp = (e) => {
@@ -265,7 +271,8 @@ export const Keyboard = ({ onKeyPress, language = "en" }) => {
             window.removeEventListener("keydown", handleKeyDown);
             window.removeEventListener("keyup", handleKeyUp);
         };
-    }, [onKeyPress]);
+    });
+    */
 
     const [isShift, setIsShift] = useState(false);
     const [isCapsLock, setIsCapsLock] = useState(false);
@@ -277,16 +284,23 @@ export const Keyboard = ({ onKeyPress, language = "en" }) => {
             case 'Shift':
                 setIsShift(true);
                 break;
-            case 'Caps Lock':
+            case 'CapsLock':
                 setIsCapsLock(!isCapsLock);
                 break;
             case 'Space':
                 onKeyPress(' ');
                 break;
+            case 'Tab':
+                onKeyPress('\t');
+                break;
             case 'Enter':
                 onKeyPress('\n');
                 break;
+            case 'Backspace':
+                onKeyPress('backspace');
+                break;
             default:
+                console.log(!caps ? key.key : key.caps);
                 onKeyPress(!caps ? key.key : key.caps);
                 if (isShift) setIsShift(false);
                 break;

@@ -21,8 +21,15 @@ const TextEditor = ({ tab }) => {
 
   const handleInsert = (char) => {
     setUndoStack([...undoStack, text]);
-    const newText = text + char;
-    setText(newText);
+    console.log(`text editor char: ${char}`);
+    if (char === 'backspace') {
+      console.log(char);
+      const newText = text.slice(0, -1); // Remove the last character
+      setText(newText);
+    } else {
+      const newText = text + char;
+      setText(newText);
+    }
   };
 
   const handleEditorAction = (action) => {
