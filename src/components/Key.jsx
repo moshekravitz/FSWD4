@@ -4,7 +4,7 @@ import "./key.css";
 const Key = ({ label, onClick, style }) => {
     return (
         <button className="key" onClick={onClick} style={style}>
-            {label}
+            <span>{label}</span>
         </button>
     );
 };

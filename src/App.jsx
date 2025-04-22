@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import UserLogin from './components/UserLogin';
 import TabsManager from './components/TabsManager';
 import './styles/App.css';
-import { Keyboard } from './components/Keyboard';
 
 const App = () => {
   const [user, setUser] = useState(localStorage.getItem('username'));
