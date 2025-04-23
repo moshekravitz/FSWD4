@@ -1,72 +1,98 @@
-// File: src/components/TextEditor.jsx
-import React, { useState, useEffect } from 'react';
-import PreviewPane from './PreviewPane';
+import React, { useState } from 'react';
 import Toolbar from './Toolbar';
-import VirtualKeyboard from './EmojiKB';
-import FileManager from './FileManager';
 import { Keyboard } from './Keyboard';
+import FileManager from './FileManager';
 import AdvancedEditorControls from './AdvancedEditorControls';
 import './TextEditor.css';
 import './AdvancedEditorControls.css';
 
-const TextEditor = ({ tab , updateTabName,updateTabLanguage}) => {
+const TextEditor = ({ tab, onChange, onSave, updateTabName, updateTabLanguage }) => {
   const [text, setText] = useState(tab.content);
   const [style, setStyle] = useState({ fontSize: '16px', color: '#000', fontFamily: 'Arial' });
-  const [language, setLanguage] = useState('en');
+  const [language, setLanguage] = useState(tab.language || 'en');
   const [undoStack, setUndoStack] = useState([]);
 
-  useEffect(() => {
-    tab.content = text;
-  }, [text]);
-
-  useEffect(() => {
+  // Update text when tab content changes
+  if (tab.content !== text) {
     setText(tab.content);
-    setLanguage(tab.language); 
-  }, [tab.id]);
-  
-
+  }
 
   const handleInsert = (char) => {
     setUndoStack([...undoStack, text]);
-    console.log(`text editor char: ${char}`);
+    
     if (char === 'backspace') {
-      console.log(char);
-      const newText = text.slice(0, -1); // Remove the last character
+      const newText = text.slice(0, -1);
       setText(newText);
+      if (onChange) onChange(newText);
     } else {
       const newText = text + char;
       setText(newText);
+      if (onChange) onChange(newText);
     }
   };
 
   const handleEditorAction = (action) => {
+    let newText = text;
+    
     switch (action) {
-      case 'lang:en': setLanguage('en'); break;
-      case 'lang:he': setLanguage('he'); break;
-      case 'lang:emoji': setLanguage('emoji'); break;
-      case 'delete-char': setText(prev => prev.slice(0, -1)); break;
-      case 'delete-word': setText(prev => prev.replace(/\s*\S+\s*$/, '')); break;
-      case 'clear-all': setText(''); break;
+      case 'lang:en': 
+        setLanguage('en'); 
+        if (updateTabLanguage) updateTabLanguage(tab.id, 'en');
+        break;
+        
+      case 'lang:he': 
+        setLanguage('he'); 
+        if (updateTabLanguage) updateTabLanguage(tab.id, 'he');
+        break;
+        
+      case 'lang:emoji': 
+        setLanguage('emoji'); 
+        if (updateTabLanguage) updateTabLanguage(tab.id, 'emoji');
+        break;
+        
+      case 'delete-char': 
+        newText = text.slice(0, -1);
+        setText(newText);
+        if (onChange) onChange(newText);
+        break;
+        
+      case 'delete-word': 
+        newText = text.replace(/\s*\S+\s*$/, '');
+        setText(newText);
+        if (onChange) onChange(newText);
+        break;
+        
+      case 'clear-all': 
+        newText = '';
+        setText(newText);
+        if (onChange) onChange(newText);
+        break;
+        
       case 'undo': {
         const prev = undoStack.pop();
         if (prev !== undefined) {
           setText(prev);
           setUndoStack([...undoStack]);
+          if (onChange) onChange(prev);
         }
         break;
       }
+      
       case 'find': {
         const f = prompt('Enter character to find:');
         alert(text.includes(f) ? 'Found!' : 'Not found');
         break;
       }
+      
       case 'replace': {
         const find = prompt('Find?');
         const replace = prompt('Replace with?');
-        const replaced = text.replaceAll(find, replace);
-        setText(replaced);
+        newText = text.replaceAll(find, replace);
+        setText(newText);
+        if (onChange) onChange(newText);
         break;
       }
+      
       case 'bold': {
         setStyle(prevStyle => ({
           ...prevStyle,
@@ -74,6 +100,7 @@ const TextEditor = ({ tab , updateTabName,updateTabLanguage}) => {
         }));
         break;
       }
+      
       case 'italic': {
         setStyle(prevStyle => ({
           ...prevStyle,
@@ -81,6 +108,7 @@ const TextEditor = ({ tab , updateTabName,updateTabLanguage}) => {
         }));
         break;
       }
+      
       case 'underline': {
         setStyle(prevStyle => ({
           ...prevStyle,
@@ -88,35 +116,41 @@ const TextEditor = ({ tab , updateTabName,updateTabLanguage}) => {
         }));
         break;
       }
+      
       default: break;
     }
   };
+
   const toggleLanguage = () => {
     const nextLang = language === 'en' ? 'he' : language === 'he' ? 'emoji' : 'en';
     setLanguage(nextLang);
-    updateTabLanguage(tab.id, nextLang); // עדכון השפה של הטאב
+    if (updateTabLanguage) updateTabLanguage(tab.id, nextLang);
   };
-  
-  console.log("here");  
+
   return (
     <div className="text-editor">
       <AdvancedEditorControls onAction={handleEditorAction} />
-      {/* <PreviewPane text={text} style={style} /> */}
       <Toolbar style={style} setStyle={setStyle} />
       <textarea
         value={text}
         onChange={(e) => {
           setText(e.target.value);
-          updateTabContent(tab.id, e.target.value);
+          if (onChange) onChange(e.target.value);
         }}
         style={style}
         className="editor-area"
       />
-      <VirtualKeyboard onInsert={handleInsert} />
-      
-        <Keyboard onKeyPress={handleInsert} language={language} onLanguageToggle={toggleLanguage} />
-      
-      <FileManager text={text} setText={setText} tab={tab} updateTabName={updateTabName}  />
+      <Keyboard onKeyPress={handleInsert} language={language} onLanguageToggle={toggleLanguage} />
+      <FileManager 
+        text={text} 
+        setText={(newText) => {
+          setText(newText);
+          if (onChange) onChange(newText);
+          if (onSave) onSave(newText);
+        }} 
+        tab={tab} 
+        updateTabName={updateTabName} 
+      />
     </div>
   );
 };

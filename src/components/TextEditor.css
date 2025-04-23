@@ -2,19 +2,18 @@
   display: flex;
   flex-direction: column;
   flex: 1;
-  width: 100%;
   padding: 15px;
   background: linear-gradient(135deg, #ffffff, #f5f5f5);
   overflow: auto;
-  box-sizing: border-box;
+  height: 100%;
 }
 
 .editor-area {
   width: 100%;
-  flex-grow: 1; /* Takes up available space */
-  min-height: 200px; /* Minimum height */
+  flex: 1;
+  min-height: 100px;
   padding: 15px;
-  margin: 15px 0;
+  margin: 10px 0;
   border: none;
   border-radius: 12px;
   resize: vertical;
@@ -24,7 +23,6 @@
   background: white;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
   transition: all 0.3s ease;
-  box-sizing: border-box;
 }
 
 .editor-area:focus {
@@ -37,41 +35,22 @@
   display: flex;
   flex-wrap: wrap;
   gap: 15px;
-  margin-bottom: 15px;
-  width: 100%;
-}
-
-.editor-section {
-  margin-bottom: 20px;
-  border-radius: 12px;
-  overflow: hidden;
-  animation: fadeIn 0.5s ease;
-  width: 100%;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.preview-pane {
-  padding: 15px;
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-  margin-bottom: 15px;
-  width: 100%;
-}
-
-.editor-heading {
-  font-size: 1.2rem;
-  font-weight: 600;
   margin-bottom: 10px;
-  color: #333;
 }
 
-/* Ensure proper spacing for components */
-.advanced-controls, .toolbar, .file-manager {
-  margin-bottom: 15px;
-  width: 100%;
+.keyboard, .file-manager {
+  margin-top: 5px;
+}
+
+/* Make the keyboard smaller to fit the grid layout */
+.keyboard {
+  margin: 5px auto;
+  transform: scale(0.85);
+  transform-origin: top center;
+}
+
+.keyboard .key {
+  height: 40px;
+  width: 40px;
+  font-size: 16px;
 }

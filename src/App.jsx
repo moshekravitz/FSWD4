@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import UserLogin from './components/UserLogin';
-import TabsManager from './components/TabsManager';
+import DocumentGrid from './components/DocumentGrid';
 import './styles/App.css';
 
 const App = () => {
@@ -10,11 +10,6 @@ const App = () => {
     localStorage.removeItem('username');
     setUser(null);
   };
-
-
-  useEffect(() => {
-    setUser(localStorage.getItem('username'));
-  }, []);
 
   return (
     <div className="app-container">
@@ -26,7 +21,7 @@ const App = () => {
             <span>Hello, {user}</span>
             <button onClick={logout}>Logout</button>
           </div>
-          <TabsManager username={user} />
+          <DocumentGrid username={user} />
         </>
       )}
     </div>
