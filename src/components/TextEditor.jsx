@@ -97,7 +97,7 @@ const TextEditor = ({ tab , updateTabName,updateTabLanguage}) => {
     updateTabLanguage(tab.id, nextLang); // עדכון השפה של הטאב
   };
   
-
+  console.log("here");  
   return (
     <div className="text-editor">
       <AdvancedEditorControls onAction={handleEditorAction} />
