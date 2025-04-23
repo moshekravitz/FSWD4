@@ -1,7 +1,6 @@
 .file-manager {
   display: flex;
   gap: 15px;
-  margin-top: 15px;
   padding: 12px;
   background: linear-gradient(to right, #EECDA3, #EF629F);
   border-radius: 12px;
