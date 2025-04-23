@@ -5,10 +5,12 @@ const symbols = ['!', '@', '#', '$', '%', '^', '&', '*', '😊', '❤️', 'של
 
 const VirtualKeyboard = ({ onInsert }) => {
   return (
-    <div className="virtual-keyboard">
-      {symbols.map((s, i) => (
-        <button key={i} onClick={() => onInsert(s)}>{s}</button>
-      ))}
+    <div className="keyboard-container">
+      <div className="virtual-keyboard">
+        {symbols.map((s, i) => (
+          <button key={i} onClick={() => onInsert(s)}>{s}</button>
+        ))}
+      </div>
     </div>
   );
 };

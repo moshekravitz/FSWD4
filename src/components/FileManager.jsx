@@ -34,11 +34,13 @@ const FileManager = ({ text, setText,tab, updateTabName  }) => {
   };
 
   return (
-    <div className="file-manager">
-      <button onClick={saveFile}>Save</button>
-      <button onClick={openFile}>Open</button>
-    </div>
-  );
+    <div className="file-manager-container">
+      <div className="file-manager">
+        <button onClick={saveFile}>Save</button>
+        <button onClick={openFile}>Open</button>
+      </div>
+  </div>
+);
 };
 
 export default FileManager;
