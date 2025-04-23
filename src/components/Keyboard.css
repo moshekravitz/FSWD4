@@ -2,18 +2,22 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
-  max-width: 900px;
+  width: 100%;
+  max-width: 900px; /* Maximum width */
+  min-width: 320px; /* Minimum width for small screens */
   padding: 20px;
   background: linear-gradient(145deg, #f0f0f0, #e0e0e0);
   border-radius: 16px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-  margin: 15px auto;
+  margin: 15px auto; /* Center the keyboard */
+  box-sizing: border-box;
 }
 
 .keyboard-row {
   display: flex;
   gap: 8px;
   width: 100%;
+  justify-content: center; /* Center keys in the row */
 }
 
 .keyboard-language {
@@ -30,6 +34,9 @@
 
 .keyboard-container {
   position: relative;
+  display: flex;
+  justify-content: center; /* Center the keyboard */
+  width: 100%;
 }
 
 .keyboard-toggle {
@@ -50,4 +57,23 @@
 .keyboard-toggle:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 12px rgba(56, 239, 125, 0.4);
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+  .keyboard {
+    padding: 10px;
+  }
+  
+  .keyboard-row {
+    gap: 4px;
+  }
+}
+
+/* For extra large screens */
+@media (min-width: 1400px) {
+  .keyboard {
+    /* Fixed size for large screens */
+    width: 900px;
+  }
 }
