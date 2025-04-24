@@ -4,7 +4,7 @@ import './DocumentGrid.css';
 
 const DocumentGrid = ({ username }) => {
   const [documents, setDocuments] = useState([
-    { id: 1, name: 'Untitled', content: '', savedContent: '', language: 'en' }
+    { id: 1, name: 'Untitled', content: '', savedContent: '', language: 'en', style: {} }
   ]);
   const [activeDocId, setActiveDocId] = useState(1);
 
@@ -12,7 +12,15 @@ const DocumentGrid = ({ username }) => {
     const newId = Date.now();
     setDocuments([
       ...documents,
-      { id: newId, name: 'Untitled', content: '', savedContent: '', language: 'en' }
+      { 
+        id: newId, 
+        name: 'Untitled', 
+        content: '', 
+        savedContent: '', 
+        language: 'en', 
+        style: {} 
+      }
+      
     ]);
     setActiveDocId(newId);
   };
@@ -28,7 +36,10 @@ const DocumentGrid = ({ username }) => {
         if (name) {
           const files = JSON.parse(localStorage.getItem('user_files') || '{}');
           if (!files[username]) files[username] = {};
-          files[username][name] = doc.content;
+          files[username][name] = {
+            text: doc.content,
+            style: doc.style || {}
+          }; 
           localStorage.setItem('user_files', JSON.stringify(files));
         }
       }
@@ -67,6 +78,12 @@ const DocumentGrid = ({ username }) => {
     ));
   };
 
+  const updateDocStyle = (id, newStyle) => {
+    setDocuments(prev => prev.map(doc => 
+      doc.id === id ? { ...doc, style: newStyle } : doc
+    ));
+  };
+  
   return (
     <div className="document-grid-container">
       <div className="document-grid-header">
@@ -94,7 +111,7 @@ const DocumentGrid = ({ username }) => {
                 ×
               </button>
             </div>
-            <div className="document-content-preview">
+            <div className="document-content-preview" style={doc.style}>
               {doc.content.slice(0, 100)}
               {doc.content.length > 100 ? '...' : ''}
             </div>
@@ -105,11 +122,13 @@ const DocumentGrid = ({ username }) => {
       {documents.length > 0 && activeDocId && (
         <div className="active-editor-container">
           <TextEditor
+            key={activeDocId}
             tab={documents.find(doc => doc.id === activeDocId)}
             onChange={(content) => updateDocContent(activeDocId, content)}
             onSave={(content) => updateSavedContent(activeDocId, content)}
             updateTabName={updateDocName}
             updateTabLanguage={updateDocLanguage}
+            updateTabStyle={(style) => updateDocStyle(activeDocId, style)}
           />
         </div>
       )}

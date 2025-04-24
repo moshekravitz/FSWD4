@@ -4,7 +4,7 @@ import './Toolbar.css';
 const Toolbar = ({ style, setStyle }) => {
   return (
     <div className="toolbar">
-      <select onChange={(e) => setStyle({ ...style, fontFamily: e.target.value })}>
+      <select value={style.fontFamily} onChange={(e) => setStyle({ ...style, fontFamily: e.target.value })}>
         <option value="Arial">Arial</option>
         <option value="Courier New">Courier New</option>
         <option value="Times New Roman">Times New Roman</option>

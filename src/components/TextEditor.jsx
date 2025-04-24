@@ -6,16 +6,13 @@ import AdvancedEditorControls from './AdvancedEditorControls';
 import './TextEditor.css';
 import './AdvancedEditorControls.css';
 
-const TextEditor = ({ tab, onChange, onSave, updateTabName, updateTabLanguage }) => {
+const TextEditor = ({ tab, onChange, onSave, updateTabName, updateTabLanguage,updateTabStyle }) => {
   const [text, setText] = useState(tab.content);
-  const [style, setStyle] = useState({ fontSize: '16px', color: '#000', fontFamily: 'Arial' });
+  const [style, setStyle] = useState(tab.style || { fontSize: '16px', color: '#000', fontFamily: 'Arial' });
   const [language, setLanguage] = useState(tab.language || 'en');
   const [undoStack, setUndoStack] = useState([]);
 
-  // Update text when tab content changes
-  if (tab.content !== text) {
-    setText(tab.content);
-  }
+
 
   const handleInsert = (char) => {
     setUndoStack([...undoStack, text]);
@@ -94,26 +91,32 @@ const TextEditor = ({ tab, onChange, onSave, updateTabName, updateTabLanguage })
       }
       
       case 'bold': {
-        setStyle(prevStyle => ({
-          ...prevStyle,
-          fontWeight: prevStyle.fontWeight === 'bold' ? 'normal' : 'bold',
-        }));
+        const newStyle = {
+          ...style,
+          fontWeight: style.fontWeight === 'bold' ? 'normal' : 'bold',
+        };
+        setStyle(newStyle);
+        if (updateTabStyle) updateTabStyle(newStyle);
         break;
       }
       
       case 'italic': {
-        setStyle(prevStyle => ({
-          ...prevStyle,
-          fontStyle: prevStyle.fontStyle === 'italic' ? 'normal' : 'italic',
-        }));
+        const newStyle = {
+          ...style,
+          fontStyle: style.fontStyle === 'italic' ? 'normal' : 'italic',
+        };
+        setStyle(newStyle);
+        if (updateTabStyle) updateTabStyle(newStyle);
         break;
       }
       
       case 'underline': {
-        setStyle(prevStyle => ({
-          ...prevStyle,
-          textDecoration: prevStyle.textDecoration === 'underline' ? 'none' : 'underline',
-        }));
+        const newStyle = {
+          ...style,
+          textDecoration: style.textDecoration === 'underline' ? 'none' : 'underline',
+        };
+        setStyle(newStyle);
+        if (updateTabStyle) updateTabStyle(newStyle);
         break;
       }
       
@@ -121,6 +124,11 @@ const TextEditor = ({ tab, onChange, onSave, updateTabName, updateTabLanguage })
     }
   };
 
+  const handleStyleChange = (newStyle) => {
+    setStyle(newStyle);
+    if (updateTabStyle) updateTabStyle(newStyle);
+  };
+   
   const toggleLanguage = () => {
     const nextLang = language === 'en' ? 'he' : language === 'he' ? 'emoji' : 'en';
     setLanguage(nextLang);
@@ -130,7 +138,7 @@ const TextEditor = ({ tab, onChange, onSave, updateTabName, updateTabLanguage })
   return (
     <div className="text-editor">
       <AdvancedEditorControls onAction={handleEditorAction} />
-      <Toolbar style={style} setStyle={setStyle} />
+      <Toolbar style={style} setStyle={handleStyleChange} />
       <textarea
         value={text}
         onChange={(e) => {
@@ -148,8 +156,9 @@ const TextEditor = ({ tab, onChange, onSave, updateTabName, updateTabLanguage })
           if (onChange) onChange(newText);
           if (onSave) onSave(newText);
         }} 
-        tab={tab} 
+        tab={{ ...tab, style, setStyle }}
         updateTabName={updateTabName} 
+        updateTabStyle={updateTabStyle}
       />
     </div>
   );
