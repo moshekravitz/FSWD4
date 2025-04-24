@@ -1,5 +1,5 @@
 import React from 'react';
-import './Toolbar.css';
+import '../styles/Toolbar.css';
 
 const Toolbar = ({ style, setStyle }) => {
   return (
@@ -13,7 +13,7 @@ const Toolbar = ({ style, setStyle }) => {
         type="number"
         min="10"
         max="48"
-        value={parseInt(style.fontSize)}
+        value={parseInt(style.fontSize) || 12}
         onChange={(e) => setStyle({ ...style, fontSize: `${e.target.value}px` })}
       />
       <input

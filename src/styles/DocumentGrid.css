@@ -46,7 +46,6 @@
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
   cursor: pointer;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
   height: 150px;
@@ -76,7 +75,6 @@
   font-size: 16px;
   color: #333;
   font-weight: 600;
-  overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -103,7 +101,6 @@
   padding: 15px;
   font-size: 14px;
   color: #666;
-  overflow: hidden;
   flex: 1;
   line-height: 1.5;
 }
@@ -112,7 +109,6 @@
   height: 60%;
   border-top: 2px solid #e0e0e0;
   background: white;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
   margin-bottom: 30px;

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./Keyboard.css";
+import "../styles/keyboard.css";
 import Key from "./key";
 import KeyboardRow from "./KeyboardRow";
 import layouts from "../data/keyboardLayouts.json";

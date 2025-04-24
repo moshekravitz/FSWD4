@@ -1,5 +1,5 @@
 import React from "react";
-import "./key.css";
+import "../styles/key.css";
 
 const Key = ({ dataKey, label, onClick, style, pressed }) => {
     return (

@@ -5,8 +5,8 @@ import FileManager from './FileManager';
 import AdvancedEditorControls from './AdvancedEditorControls';
 import EmojiInput from './EmojiKB';
 import Inputs from './inputs';
-import './TextEditor.css';
-import './AdvancedEditorControls.css';
+import '../styles/TextEditor.css';
+import '../styles/AdvancedEditorControls.css';
 
 const TextEditor = ({ tab, onChange, onSave, updateTabName, updateTabLanguage,updateTabStyle }) => {
   const [text, setText] = useState(tab.content);
@@ -69,6 +69,7 @@ const TextEditor = ({ tab, onChange, onSave, updateTabName, updateTabLanguage,up
         
       case 'undo': {
         const prev = undoStack.pop();
+        console.log(prev);
         if (prev !== undefined) {
           setText(prev);
           setUndoStack([...undoStack]);

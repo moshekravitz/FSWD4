@@ -1,5 +1,5 @@
 import React from 'react';
-import './AdvancedEditorControls.css';
+import '../styles/AdvancedEditorControls.css';
 
 const AdvancedEditorControls = ({ onAction }) => {
   return (

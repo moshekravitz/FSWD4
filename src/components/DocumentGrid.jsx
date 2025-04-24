@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import TextEditor from './TextEditor';
-import './DocumentGrid.css';
+import '../styles/DocumentGrid.css';
 
 const DocumentGrid = ({ username }) => {
   const [documents, setDocuments] = useState([

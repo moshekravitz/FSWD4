@@ -1,5 +1,5 @@
 import React from 'react';
-import './FileManager.css';
+import '../styles/FileManager.css';
 
 const FileManager = ({ text, setText,tab, updateTabName,updateTabStyle  }) => {
   const username = localStorage.getItem('username');

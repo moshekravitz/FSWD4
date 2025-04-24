@@ -1,5 +1,5 @@
 import React from 'react';
-import './EmojiKB.css';
+import '../styles/EmojiKB.css';
 import symbols from '../data/emojis.json'
 import Key from './key';
 
