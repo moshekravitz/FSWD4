@@ -1,18 +1,24 @@
 import React from 'react';
 import './EmojiKB.css';
+import symbols from '../data/emojis.json'
+import Key from './key';
 
-const symbols = ['!', '@', '#', '$', '%', '^', '&', '*', '😊', '❤️', 'שלום'];
+//const symbols = ['!', '@', '#', '$', '%', '^', '&', '*', '😊', '❤️', 'שלום'];
+console.log(symbols);
 
-const VirtualKeyboard = ({ onInsert }) => {
+const EmojiInput = ({ onInsert }) => {
+  console.log("here");
   return (
-    <div className="keyboard-container">
       <div className="virtual-keyboard">
         {symbols.map((s, i) => (
-          <button key={i} onClick={() => onInsert(s)}>{s}</button>
+          <Key 
+            key={i} 
+            label={s}
+            onClick={() => onInsert(s)}
+          />
         ))}
       </div>
-    </div>
   );
 };
 
-export default VirtualKeyboard;
+export default EmojiInput;

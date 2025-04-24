@@ -3,6 +3,8 @@ import Toolbar from './Toolbar';
 import { Keyboard } from './Keyboard';
 import FileManager from './FileManager';
 import AdvancedEditorControls from './AdvancedEditorControls';
+import EmojiInput from './EmojiKB';
+import Inputs from './inputs';
 import './TextEditor.css';
 import './AdvancedEditorControls.css';
 
@@ -148,7 +150,16 @@ const TextEditor = ({ tab, onChange, onSave, updateTabName, updateTabLanguage,up
         style={style}
         className="editor-area"
       />
-      <Keyboard onKeyPress={handleInsert} language={language} onLanguageToggle={toggleLanguage} />
+      <Inputs
+        style={{ display: 'flex', flexDirection: 'row'}}
+        inputs={
+          <>
+            <EmojiInput onInsert={handleInsert} />
+            <Keyboard onKeyPress={handleInsert} language={language} onLanguageToggle={toggleLanguage} />
+          </>
+        }
+      >
+      </Inputs>
       <FileManager 
         text={text} 
         setText={(newText) => {

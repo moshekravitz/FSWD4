@@ -25,7 +25,7 @@ export const Keyboard = ({ onKeyPress, language = "en" }) => {
         gap: "5px",
     };
 
-    const [pressedKeys, setPressedKeys] = useState({});
+    //const [pressedKeys, setPressedKeys] = useState({});
 
     /*
     useEffect(() => {
@@ -124,7 +124,7 @@ export const Keyboard = ({ onKeyPress, language = "en" }) => {
                             dataKey={key}
                             label={!caps ? key.key : key.caps}
                             onClick={handleKeyPressed}
-                            pressed={!!pressedKeys[key.key]}
+                            /*pressed={!!pressedKeys[key.key]}*/
                             style={{
                                 flexGrow: keySizes[key.key] || 0,
                                 flexBasis: keySizes[key.key] ? "auto" : "50px",
